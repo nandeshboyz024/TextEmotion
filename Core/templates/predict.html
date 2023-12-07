@@ -1,0 +1,74 @@
+{% extends "./home.html" %}
+{% load static %}
+
+{% block addCSS %}
+    <link rel="stylesheet" href="{% static 'css/predict.css' %}">
+{% endblock addCSS %}
+
+{% block Content %}
+<div class="text-right" style="margin:10px">
+	<button id="toggleButton">Play Music</button>
+</div>
+<div class="container">
+    <div class = "row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div style="margin:10px; text-align:center;">
+                    <h2 style="font-weight:bold;background: linear-gradient(to right, #FCC978, #FB5EA3); -webkit-background-clip: text; color: transparent;font-family:Helvetica Neue;">Ask Your</h2>
+                    <h2 style="font-weight:bold;background: linear-gradient(to right, #FB5CA6, #FA00FF); -webkit-background-clip: text; color: transparent;font-family:Helvetica Neue;">Query</h2>
+                    <div style="margin-left:30px;">
+                        <form action="" method = "POST">
+                            {% csrf_token %}
+                                {{form.query}}
+                                <input id="predict" type="submit" value="Predict">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card" style="text-align:center;">
+                <h2 id="song_id" style="font-weight:bold;background: linear-gradient(to right, #FCC978, #FB5EA3); -webkit-background-clip: text; color: transparent;font-family:Helvetica Neue;" data-song="{{bgm_path}}" >My Prediction:</h2>
+                <h2 style="font-weight:bold;background: linear-gradient(to right, #FB5CA6, #FA00FF); -webkit-background-clip: text; color: transparent;font-family:Helvetica Neue;">{{pred}} </h2>
+                <img src="{% static img_path %}" alt="predicted emotion" srcset="">
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock Content %}
+
+{% block addJS %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let song = document.getElementById("song_id");
+        let s = song.getAttribute('data-song');
+        const audio = new Audio("{% static '' %}"+s);
+        audio.loop=true;
+        toggleButton.addEventListener('click', function () {
+            if (audio.paused) {
+                audio.play();
+                toggleButton.textContent="Pause Music";
+            } else {
+                audio.pause();
+                toggleButton.textContent="Play Music"
+            }
+        });
+    });
+    {% comment %} document.addEventListener("DOMContentLoaded", function () {
+        // Disable the 'Select dataset' option after the page has loaded
+        var isAble = {{isAble|yesno:"true,false"}};
+        document.querySelector('#id_dataset option[value="0"]').disabled = isAble;
+      });
+      function validateForm() {
+        var selectedValue = document.querySelector('#id_dataset').value;
+        
+        if (selectedValue != '1' && selectedValue !='2'){
+          alert('Please select Select dataset')
+          return false;  // Prevent form submission
+        }
+  
+        return true;  // Allow form submission
+      } {% endcomment %}
+</script>
+{% endblock addJS %}

@@ -1,0 +1,146 @@
+{% extends "./home.html" %}
+{% load static %}
+{% block Title %}
+    Train
+{% endblock Title %}
+
+{% block addCSS %}
+    <link rel="stylesheet" href="{% static 'css/train.css' %}">
+{% endblock addCSS %}
+
+
+{% block Content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6" style="font-family:Helvetica Neue;text-align:justify;font-size:20px;">
+                <p>This model is like a child. Whatever you teach it, it will learn. The more you teach it, the better it will learn, and it will tell you as well as it has learned when you ask.</p>
+                <p>If It makes incorrect predictions, train it and teach it what is right. In other words, add new data to the training data.</p>
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static 'images/bert.png' %}" style="width:500px;" alt="" srcset="">
+            </div>
+        </div>
+    </div>
+    
+    {% if data_size %}
+        <div style="text-align:center;">
+            <form action="{% url 'train_data' %}" method="get">
+                <button class="btn_style" id="trainmy">Train Your Data</button>
+            </form>
+        </div>
+    {% else %}
+    <p style="color:red;text-align:center;font-family:Helvetica Neue;"><i> <b>Important: </b>You have not added any data in your dataset, so you are not able to train model.</i></p>
+    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <canvas id="myChart1" aria-Label="chart" role="img" width="500" height="400" ></canvas>
+            </div>
+            <div class="col-lg-6">
+                <canvas id="myChart2" aria-Label="chart" role="img" width="500" height="400" ></canvas>
+            </div>
+        </div>
+    </div>
+    
+
+{% endblock Content %}
+
+
+{% block addJS %}
+    <script src="{% static "js/chart.js" %}"> </script>
+
+    <script src="{% static "js/train.js" %}"> </script>
+    <script>
+        let c1 = document.getElementById('myChart1');
+var ctx1= c1.getContext('2d');
+
+let c2 = document.getElementById('myChart2');
+var ctx2= c2.getContext('2d');
+
+var myChart = new Chart(ctx1,{
+    type:"bar",
+    data:{
+        labels:["joy","sadness","anger","fear","love","surprise"],
+        datasets:[
+            {
+                data:{{size|safe}},
+                label:"Emotions",
+                backgroundColor: [
+                    'lime',
+                    'blue',
+                    'red',
+                    'green',
+                    '#ff77ff',
+                    'gold'
+                ],
+                borderColor:["black"],
+                borderWidth:1,
+            },
+        ],
+    },
+    options:{
+        responsive:false,
+        layout:{
+            padding:{
+                left:20,
+                right:0,
+                top:30,
+                bottom:0,
+            }
+        },
+        tooltips:{
+            enabled:true,
+            backgroundColor:'red',
+        },
+        title:{
+            display:true,
+            text:"mjvtf",
+        }
+    },
+});
+
+
+var myChart = new Chart(ctx2,{
+    type:"pie",
+    data:{
+        labels:["joy","sadness","anger","fear","love","surprise"],
+        datasets:[
+            {
+                data:{{size|safe}},
+                label:"Emotions",
+                backgroundColor: [
+                    'lime',
+                    'blue',
+                    'red',
+                    'green',
+                    '#ff77ff',
+                    'gold'
+                ],
+                borderColor:["black"],
+                borderWidth:1,
+            },
+        ],
+    },
+    options:{
+        responsive:false,
+        layout:{
+            padding:{
+                left:20,
+                right:0,
+                top:30,
+                bottom:0,
+            }
+        },
+        tooltips:{
+            enabled:true,
+            backgroundColor:'red',
+        },
+        title:{
+            display:true,
+            text:"mjvtf",
+        }
+    },
+});
+
+    </script>
+{% endblock addJS %}

@@ -1,0 +1,42 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+textarea {
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  border-image:linear-gradient(to right,#ff66c4,#5170ff) 1;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+}
+textarea:focus {
+  outline: none;
+  border: 2px solid transparent;
+  border-image:linear-gradient(to right,#5170ff,#ff66c4) 1;
+  border-radius: 4px;
+}
+
+#predict{
+  color: white;
+  border-radius: 15px;
+  color: white;
+  background: linear-gradient(to right,#5170ff,#ff66c4);
+}
+#predict:hover{
+  font-weight: bold;
+  transform: scale(1.01);
+}
+
+#toggleButton{
+  color: white;
+  border-radius: 15px;
+  color: white;
+  background: linear-gradient(to right,#5170ff,#ff66c4);
+}
+#toggleButton:hover{
+  font-weight: bold;
+  transform: scale(1.01);
+}

@@ -1,0 +1,75 @@
+{% extends "./home.html" %}
+{% load static %}
+
+
+{% block Title %}
+  Dataset
+{% endblock Title %}
+
+{% block addCSS %}
+  <link rel="stylesheet" href="{% static 'css/dataset.css' %}">
+{% endblock addCSS %}
+
+{% block Content %}
+  <button class="btn_style" id="show">Show Custom Data</button>
+  <div id = "data_cls" style="margin-top:15px;" data-items="{{items}}"></div>
+  <h1 style="margin-top:20px;background:radial-gradient(circle at 10% 20%, rgb(255, 12, 253) 0%, rgb(255, 241, 0) 80%); -webkit-background-clip: text; color: transparent;font-family:Helvetica Neue;display: inline;">Create Your Own Dataset</h1>
+  <div class="card" id = "mydiv" style="margin-top:20px;padding-bottom:10px;position: relative;">  
+    <canvas id="cv" style="position:absolute;"></canvas>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="container">
+        <div class="row" style="margin-left:5px;">
+          <div class="col-lg-3" style="text-align:center;" >
+            <h3 style="background: linear-gradient(to right,  #FCC978, #FB5EA3); -webkit-background-clip: text; color: transparent;font-family:Helvetica Neue;">Select</h2>
+            <h3 style="background: linear-gradient(to right, #FB5CA6, #FA00FF); -webkit-background-clip: text; color: transparent;font-family:Helvetica Neue;">Emotion-Class</h2>
+            {{form.emotion}}
+          </div>
+          <div class="col-lg-9" style="text-align:center;">
+            <h3 style="background: linear-gradient(to right,  #FCC978, #FB5EA3); -webkit-background-clip: text; color: transparent;font-family:Helvetica Neue;">Write Here...</h2>
+            {{form.type}}
+            <input class="btn_style" id="add_data" type="submit" value="Add Data">
+          </div>
+        </div>
+      </div>
+   </form>
+  </div>
+  <div style="margin-top:20px;display: flex; justify-content: space-between; align-items: center;">
+    <button class="btn_style" id="showmy">Hide My Data</button>
+    <form action="{% url 'reload' %}" method="get">
+      <button class="btn_style" id="resetmy">Reset My Data</button>
+    </form>
+  </div>
+  <div id="my_data" class="visible" style="margin-top:15px;">
+    {% if data_size %}
+      <div style="text-align:center;">
+        <form action="{% url 'pop_data' %}" method="get">
+          <button class="btn_style" id="popmy">Delete Your Last Entry</button>
+        </form>
+      </div>
+      <div class="my_data_cls" style="margin-top:15px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Text</th>
+              <th>Label</th>
+            </tr>
+          </thead>
+          {% for item in my_items %}
+            <tr>
+              <td>{{item.0}}</td>
+              <td>{{item.1}}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    {% else %}
+      <p style="color:red;text-align:center;font-family:Helvetica Neue;"><i>You have no data.</i></p>
+    {% endif %}
+  </div>
+{% endblock Content %}
+
+{% block addJS %}
+<script src="{% static "js/dataset.js" %}"> </script>
+{% endblock addJS %}
+

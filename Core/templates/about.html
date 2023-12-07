@@ -1,0 +1,36 @@
+{% extends "./home.html" %}
+{% load static %}
+{% block Title %}
+    About
+{% endblock Title %}
+
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+{% block Content %}
+    <div style="text-align:justify;font-family:Helvetica Neue;">
+        <h1 class="heading" style="margin-top:20px;background:radial-gradient(circle at 10% 20%, rgb(255, 12, 253) 0%, rgb(255, 241, 0) 80%); -webkit-background-clip: text; color: transparent;font-family:Helvetica Neue;display:inline;">Introduction: </h1>
+        <p>Hello there! Have you ever wondered how computers can understand our feelings, just by reading what we write? It's like magic, but it's actually a cool thing called "<b>Emotion Recognition using Text</b>"!</p>
+        <p>Imagine you're texting your friend about your day. You might say, "I had so much fun at the park!" or "I felt a bit sad because it rained during our picnic." Well, computers can read these messages and figure out if you're happy, sad, or maybe even excited!</p>   
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5" style="text-align:justify;font-family:Helvetica Neue;">
+                <h1 class="heading" style="margin-top:20px;background:radial-gradient(circle at 10% 20%, rgb(255, 12, 253) 0%, rgb(255, 241, 0) 80%); -webkit-background-clip: text; color: transparent;font-family:Helvetica Neue;">How Computer See: </h1>
+                <p><b style="margin-top:20px;background:radial-gradient(circle at 10% 20%, rgb(255, 12, 253) 0%, rgb(255, 241, 0) 80%); -webkit-background-clip: text; color: transparent;font-family:Helvetica Neue;">Words have Feelings: </b> Just like people, words can express different emotions. For example, "happy," "joyful," and "excited" all show positive feelings, while "sad," "disappointed," and "lonely" express sadness.</p>
+                <p><b style="margin-top:20px;background:radial-gradient(circle at 10% 20%, rgb(255, 12, 253) 0%, rgb(255, 241, 0) 80%); -webkit-background-clip: text; color: transparent;font-family:Helvetica Neue;">Detecting Emotions: </b> Computers are super smart at understanding patterns. Scientists and computer experts have taught computers to recognize these emotional patterns in the words we use. So, when you type, the computer can guess how you're feeling!</p>
+                <p><b style="margin-top:20px;background:radial-gradient(circle at 10% 20%, rgb(255, 12, 253) 0%, rgb(255, 241, 0) 80%); -webkit-background-clip: text; color: transparent;font-family:Helvetica Neue;">Emoji Friends:</b> You know those cute emojis you use in your messages? They are like little helpers for computers. Emojis can give extra clues about emotions. 😃 means happy, 😢 means sad, and there are emojis for all sorts of feelings!</p>
+                <p><b style="margin-top:20px;background:radial-gradient(circle at 10% 20%, rgb(255, 12, 253) 0%, rgb(255, 241, 0) 80%); -webkit-background-clip: text; color: transparent;font-family:Helvetica Neue;">Helping Us:</b> Emotion recognition can be useful! For example, it helps teachers understand how students feel about school or can make sure that robots or virtual assistants respond to us in a friendly way.</p>
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-6">
+                <img src="{% static 'images/img_emotion1.png' %}" style="width:500px" alt="" srcset="">
+            </div>
+            <div style="text-align:justify;font-family:Helvetica Neue;">
+                <p style="text-align:justify;">So, the next time you send a message or write a story, remember that computers can understand your emotions too! It's like having a friend who can read between the lines and know exactly how you feel.</p>
+            </div>
+        </div>
+    </div>
+    
+{% endblock Content %}
+
+

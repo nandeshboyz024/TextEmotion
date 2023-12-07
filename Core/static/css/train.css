@@ -1,0 +1,10 @@
+.btn_style{
+    color: white;
+    border-radius: 15px;
+    color: white;
+    background: linear-gradient(to right,#5170ff,#ff66c4);
+  }
+  .btn_style:hover{
+    font-weight: bold;
+    transform: scale(1.01);
+  }

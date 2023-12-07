@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block Title %}
+        Home
+        {% endblock Title %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block addCSS %}
+    
+    {% endblock addCSS %}
+</head>
+    <h1 class="heading" style="text-align:center;font-weight:bold;background: linear-gradient(to right, #FCC978, #FA00FF); -webkit-background-clip: text; color: transparent;"> Emotion Recognisation using text</h1>
+    <div class="base" style="height:80px;">
+        <div class="row">
+            <div class="col-2">
+                <img id="logo" style="width:40px;height:40px"  src="{%static 'images/VizLogo.gif' %}" alt="VizLogo" srcset="">
+                <h4>Vizuara</h4>
+            </div>
+            <div class="col-10">
+                <nav class="nav text-center">    
+                    <a href="{% url 'about' %}" class="nav-link">About</a>
+                    <a href="{% url 'dataset' %}" class="nav-link">Dataset</a>
+                    <a href="{% url 'train' %}" class="nav-link">Train-Model</a>
+                    <a href="{% url 'predict' %}" class="nav-link">Predict</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+    {% block Content %}
+    <p>I am Home Page</p>
+    {% endblock Content %}
+    
+    {% block addJS %}
+
+    {% endblock addJS  %}
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/proper.js' %}"></script>
+</body>
+</html>

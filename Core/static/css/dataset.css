@@ -1,0 +1,83 @@
+table{
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th{
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+td{
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+textarea {
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  border-image:linear-gradient(to right,#ff66c4,#5170ff) 1;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+}
+textarea:focus {
+  outline: none;
+  border: 2px solid transparent;
+  border-image:linear-gradient(to right,#5170ff,#ff66c4) 1;
+  border-radius: 4px;
+}
+/* Style the select element */
+#emotion{
+  text-align: center;
+  padding: 5px;
+  font-size:20px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  background-color: #05c60b92;
+  width: 140px;
+}
+
+/* Style the options */
+#emotion option {
+  background-color: #fff;
+  color: #333;
+}
+
+/* Style the select element on hover */
+#emotion:hover {
+  border-color: #999;
+}
+
+/* Style the options on hover */
+#emotion option:hover {
+  background-color: #05c60b92;
+}
+
+.btn_style{
+  color: white;
+  border-radius: 15px;
+  color: white;
+  background: linear-gradient(to right,#5170ff,#ff66c4);
+}
+.btn_style:hover{
+  font-weight: bold;
+  transform: scale(1.01);
+}
+.hidden{
+  display: none;
+}
+
+.my_data_cls{
+  padding:2px;
+  border:2px solid #dddddd;
+}
