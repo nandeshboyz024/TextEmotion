@@ -49,28 +49,17 @@ def readData(sub_path):
     return x
 
 trx = readData("train")
-tstx = readData("test")
-vx = readData("val")
 
 isAble=True
 
 
 train=pd.read_csv("Core/data/train.txt",names=['text','emotion'],sep=';')
-test=pd.read_csv("Core/data/test.txt",names=['text','emotion'],sep=';')
-val=pd.read_csv("Core/data/val.txt",names=['text','emotion'],sep=';')
 mytrain=[]
 
 index = train[train.duplicated() == True].index
 train.drop(index, axis = 0, inplace = True)
 train.reset_index(inplace=True, drop = True)
 
-index = test[test.duplicated() == True].index
-test.drop(index, axis = 0, inplace = True)
-test.reset_index(inplace=True, drop = True)
-
-index = val[val.duplicated() == True].index
-val.drop(index, axis = 0, inplace = True)
-val.reset_index(inplace=True, drop = True)
 
 def dataframe_difference(df1, df2, which=None):
     comparison_df = df1.merge(
@@ -124,19 +113,11 @@ def normalized_sentence(sentence):
     return sentence
 
 train=normalize_text(train)
-test=normalize_text(test)
-val=normalize_text(val)
 
 # train model
 X_train = train['text'].values
 y_train = train['emotion'].values
 
-X_test = test['text'].values
-y_test = test['emotion'].values
-
-X_val = val['text'].values
-y_val = val['emotion'].values
-print(train.emotion.value_counts().get('joy',0))
 
 size =[train.emotion.value_counts().get('joy',0),
        train.emotion.value_counts().get('sadness',0),
