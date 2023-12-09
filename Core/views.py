@@ -3,10 +3,8 @@ from .forms import PredictForm
 from .forms import AddDataForm
 # Create your views here.
 
-import random
 import re
 import pandas as pd
-from tqdm import tqdm
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.ensemble import RandomForestClassifier
@@ -23,36 +21,12 @@ emotions_dict = {
 }
 
 emotions_dict["tag_id"] = dict((j, i) for i, j in emotions_dict["id_tag"].items())
-def readData(sub_path):
-    path = "Core/data/" + sub_path + ".txt"
-    data = open(path).read().split("\n")
-    
-    x = []
-    
-    print(f"load {sub_path}...")
-    for txt in tqdm(data):
-        try:
-            text = txt.split(";")
-            text[1] = emotions_dict["tag_id"][text[1]]
-            x.append(text)
-        except:
-            continue
-
-    #df = pd.DataFrame(x, columns=["text", "emotion"])
-    
-    return x
-
-trx = readData("train")
-
-isAble=True
-
-
-train=pd.read_csv("Core/data/train.txt",names=['text','emotion'],sep=';')
+#train=pd.read_csv("Core/data/train.txt",names=['text','emotion'],sep=';')
 mytrain=[]
 
-index = train[train.duplicated() == True].index
-train.drop(index, axis = 0, inplace = True)
-train.reset_index(inplace=True, drop = True)
+# index = train[train.duplicated() == True].index
+# train.drop(index, axis = 0, inplace = True)
+# train.reset_index(inplace=True, drop = True)
 
 
 def dataframe_difference(df1, df2, which=None):
@@ -66,7 +40,6 @@ def dataframe_difference(df1, df2, which=None):
     else:
         diff_df = comparison_df[comparison_df['_merge'] == which]
     return diff_df
-
 
 def Removing_numbers(text):
     text=''.join([i for i in text if not i.isdigit()])
@@ -106,21 +79,15 @@ def normalized_sentence(sentence):
     sentence= Removing_urls(sentence)
     return sentence
 
-train=normalize_text(train)
+#train=normalize_text(train)
 
 # train model
-X_train = train['text'].values
-y_train = train['emotion'].values
+# X_train = train['text'].values
+# y_train = train['emotion'].values
 
-
-size =[train.emotion.value_counts().get('joy',0),
-       train.emotion.value_counts().get('sadness',0),
-       train.emotion.value_counts().get('anger',0),
-       train.emotion.value_counts().get('fear',0),
-       train.emotion.value_counts().get('love',0),
-       train.emotion.value_counts().get('surprise',0)
-       ]
-
+global log_reg
+global isTrain
+isTrain=False
 
 def train_model(model,data,targets):
     text_clf=Pipeline([('vect',TfidfVectorizer()),('clf',model)])
@@ -128,15 +95,14 @@ def train_model(model,data,targets):
     return text_clf
 
 
-log_reg = train_model(RandomForestClassifier(random_state = 0), X_train, y_train)
-pred = log_reg.predict(['Happy'])
-print(pred)
+#log_reg = train_model(RandomForestClassifier(random_state = 0), X_train, y_train)
+#pred = log_reg.predict(['Happy'])
+#print(pred)
 
 def run(request):
     return render(request,'about.html')
 
 def Dataset(request):
-    items=random.sample(trx,10)
     if(request.method == "POST"):
         fm=AddDataForm(request.POST)
         if fm.is_valid():
@@ -155,9 +121,8 @@ def Dataset(request):
 
             mytrain.append(newData)
             return redirect('dataset')
-    fm=AddDataForm(auto_id=True)
+    fm=AddDataForm()
     context={
-        "items":items,
         "form":fm,
         "my_items":reversed(mytrain),
         "data_size":len(mytrain)
@@ -168,21 +133,37 @@ def Dataset(request):
 def Train(request):
     context={
         "data_size":len(mytrain),
-        "size":size
+        #"size":size
     }
     return render(request,'train.html',context)
 
 def Predict_Views(request):
+    chances = [0,0,0,0,0,0]
     pred=""
+    global isTrain
     if(request.method == 'POST'):
         fm = PredictForm(request.POST)
         if fm.is_valid():
-            print('data: ',fm.cleaned_data['query'])
             global log_reg
             predict_arr=log_reg.predict([normalized_sentence(fm.cleaned_data['query'])])
+            predict_proba_arr = log_reg.predict_proba([normalized_sentence(fm.cleaned_data['query'])])
             pred=predict_arr[0]
+                
+            for emotion,probability in zip(log_reg.classes_, predict_proba_arr[0]):
+                if(emotion=='joy'):
+                    chances[0] = round(probability * 100)
+                elif(emotion=='sadness'):
+                    chances[1] = round(probability * 100)
+                elif(emotion=='anger'):
+                    chances[2] = round(probability * 100)
+                elif(emotion=='fear'):
+                    chances[3] = round(probability * 100)
+                elif(emotion=='love'):
+                    chances[4] = round(probability * 100)
+                elif(emotion=='surprise'):
+                    chances[5] = round(probability * 100)
     else:
-        fm = PredictForm(auto_id=True)
+        fm = PredictForm()
     bgm_path = 'media/bgm.mp3'
     img_path='media/welcome.gif'
     if(pred == "sadness"):
@@ -204,13 +185,13 @@ def Predict_Views(request):
         bgm_path='media/surprise.mp3'
         img_path='media/surprise.gif'
     #fm2=PredictForm2()
-    global isAble
     context={
         "pred":pred,
         "form":fm,
         "bgm_path":bgm_path,
         "img_path":img_path,
-        "isAble":isAble
+        "isTrain":isTrain,
+        "chances":chances,
     }
     return render(request,'predict.html',context)
 
@@ -223,13 +204,33 @@ def Pop_data(request):
     return redirect('dataset')
 
 def train_data(request):
-    
-    my_train=pd.DataFrame(mytrain, columns=["text", "emotion"])
-    my_train=normalize_text(my_train)
-    X_train=my_train['text'].values
-    y_train=my_train['emotion'].values
+    train=pd.DataFrame(mytrain, columns=["text", "emotion"])
+    train=normalize_text(train)
+    X_train=train['text'].values
+    y_train=train['emotion'].values
     global log_reg
+    global isTrain
     log_reg = train_model(RandomForestClassifier(random_state = 0), X_train, y_train)
-    global isAble
-    isAble = False
+    isTrain=True
     return redirect('predict')
+
+def visualize(request):
+    train=pd.DataFrame(mytrain, columns=["text", "emotion"])
+    size =[
+        train.emotion.value_counts().get('joy',0),
+        train.emotion.value_counts().get('sadness',0),
+        train.emotion.value_counts().get('anger',0),
+        train.emotion.value_counts().get('fear',0),
+        train.emotion.value_counts().get('love',0),
+        train.emotion.value_counts().get('surprise',0)
+    ]
+    context={
+        "size":size,
+    }
+    return render(request,'visualization.html',context)
+
+def normalize(request):
+    return render(request,'normalization.html')
+
+def conclusion(request):
+    return render(request,'conclusion.html')

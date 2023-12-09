@@ -16,7 +16,7 @@
     {% endblock addCSS %}
 </head>
     <h1 class="heading" style="text-align:center;font-weight:bold;background: linear-gradient(to right, #FCC978, #FA00FF); -webkit-background-clip: text; color: transparent;"> Emotion Recognisation using text</h1>
-    <div class="base" style="height:80px;">
+    {% comment %} <div class="base" style="height:80px;">
         <div class="row">
             <div class="col-2">
                 <img id="logo" style="width:40px;height:40px"  src="{%static 'images/VizLogo.gif' %}" alt="VizLogo" srcset="">
@@ -31,11 +31,19 @@
                 </nav>
             </div>
         </div>
+    </div> {% endcomment %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
+                {% include 'sidebar.html' %}
+            </div>
+            <div class="col-sm-9">
+                {% block Content %}
+                
+                {% endblock Content %}
+            </div>
+        </div>
     </div>
-    {% block Content %}
-    <p>I am Home Page</p>
-    {% endblock Content %}
-    
     {% block addJS %}
 
     {% endblock addJS  %}

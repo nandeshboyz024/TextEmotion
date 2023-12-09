@@ -8,9 +8,11 @@
     <link rel="stylesheet" href="{% static 'css/train.css' %}">
 {% endblock addCSS %}
 
-
 {% block Content %}
-    <div class="container">
+    <div style="text-align:center;font-family:Helvetica Neue;margin-top:10px;">
+        <h1 class="heading" style="margin-top:20px;background:radial-gradient(circle at 10% 20%, rgb(255, 12, 253) 0%, rgb(255, 241, 0) 80%); -webkit-background-clip: text; color: transparent;font-family:Helvetica Neue;">Train-Model</h1>
+    </div>
+    <div class="container" style="margin-top:10px;">
         <div class="row">
             <div class="col-lg-6" style="font-family:Helvetica Neue;text-align:justify;font-size:20px;">
                 <p>This model is like a child. Whatever you teach it, it will learn. The more you teach it, the better it will learn, and it will tell you as well as it has learned when you ask.</p>
@@ -21,7 +23,6 @@
             </div>
         </div>
     </div>
-    
     {% if data_size %}
         <div style="text-align:center;">
             <form action="{% url 'train_data' %}" method="get">
@@ -41,106 +42,4 @@
             </div>
         </div>
     </div>
-    
-
 {% endblock Content %}
-
-
-{% block addJS %}
-    <script src="{% static "js/chart.js" %}"> </script>
-
-    <script src="{% static "js/train.js" %}"> </script>
-    <script>
-        let c1 = document.getElementById('myChart1');
-var ctx1= c1.getContext('2d');
-
-let c2 = document.getElementById('myChart2');
-var ctx2= c2.getContext('2d');
-
-var myChart = new Chart(ctx1,{
-    type:"bar",
-    data:{
-        labels:["joy","sadness","anger","fear","love","surprise"],
-        datasets:[
-            {
-                data:{{size|safe}},
-                label:"Emotions",
-                backgroundColor: [
-                    'lime',
-                    'blue',
-                    'red',
-                    'green',
-                    '#ff77ff',
-                    'gold'
-                ],
-                borderColor:["black"],
-                borderWidth:1,
-            },
-        ],
-    },
-    options:{
-        responsive:false,
-        layout:{
-            padding:{
-                left:20,
-                right:0,
-                top:30,
-                bottom:0,
-            }
-        },
-        tooltips:{
-            enabled:true,
-            backgroundColor:'red',
-        },
-        title:{
-            display:true,
-            text:"mjvtf",
-        }
-    },
-});
-
-
-var myChart = new Chart(ctx2,{
-    type:"pie",
-    data:{
-        labels:["joy","sadness","anger","fear","love","surprise"],
-        datasets:[
-            {
-                data:{{size|safe}},
-                label:"Emotions",
-                backgroundColor: [
-                    'lime',
-                    'blue',
-                    'red',
-                    'green',
-                    '#ff77ff',
-                    'gold'
-                ],
-                borderColor:["black"],
-                borderWidth:1,
-            },
-        ],
-    },
-    options:{
-        responsive:false,
-        layout:{
-            padding:{
-                left:20,
-                right:0,
-                top:30,
-                bottom:0,
-            }
-        },
-        tooltips:{
-            enabled:true,
-            backgroundColor:'red',
-        },
-        title:{
-            display:true,
-            text:"mjvtf",
-        }
-    },
-});
-
-    </script>
-{% endblock addJS %}

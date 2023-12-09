@@ -1,0 +1,24 @@
+{% load static %}
+<style>
+  
+</style>
+
+{% block addCSS %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% endblock addCSS %}
+<div class="base" style="height:100%;">
+    <div class="text-center">
+        <img id="logo" style="width:40px;height:40px"  src="{%static 'images/VizLogo.gif' %}" alt="VizLogo" srcset="">
+    </div>
+    <h3 class="text-white text-center mt-3">Vizuara</h3>
+    <hr class="border-light">
+    <nav class="nav flex-column text-center">
+        <a href="{% url 'home' %}" class="nav-link {{home}}">Introduction</a>
+        <a href="{% url 'dataset' %}" class="nav-link {{dataset}}">Dataset</a>
+        <a href="{% url 'visualization' %}" class="nav-link {{visualization}}">Data Visualisation</a>
+        <a href="{% url 'normalization' %}" class="nav-link {{normalization}}">Data Normalisation</a>
+        <a href="{% url 'train' %}" class="nav-link {{train}}">Train-Model</a>
+        <a href="{% url 'predict' %}" class="nav-link {{predict}}">Predict</a>
+        <a href="{% url 'conclusion' %}" class="nav-link {{conclusion}}">Conclusion</a>
+    </nav>
+</div>

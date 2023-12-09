@@ -1,50 +1,50 @@
 emotion = ['sadness','anger','love','surprise','fear','joy'];
-let toggle = 0;
-let show = document.getElementById("show");
-show.onclick = ()=>{
-    let newDiv = document.getElementById('data_cls');
-    if(toggle==0){
-        show.textContent = "hide Custom Data";
-        toggle=1;
-        let itemsData = newDiv.getAttribute('data-items');
-        newDiv.innerHTML=itemsData;
-        total = itemsData.length;
-        datas=[];
-        i=1;
-        while(i<total){
-            let s="";
-            if(itemsData[i]=='['){
-                i++;
-                while(itemsData[i]!=']'){
-                    s+=(itemsData[i]);
-                    i++;
-                }
-                let c=parseInt(s.slice(-1));
-                s=s.slice(1,-4);
-                datas.push([s,c]);
-            }
-            i++;
-        }
-        let str0 = `<table>\n`;
-        let str1 = `<thead>\n<tr>\n<th>Text</th>\n<th>Label</th>\n</tr>\n</thead>\n`;
-        str0=str0+str1;
-        for(let i=0;i<datas.length;i++){ 
-            let str2 = `<tr>\n<td>${datas[i][0]}</td>\n<td>${emotion[datas[i][1]]}</td>\n</tr>\n`;
-            str0 = str0 + str2;
-        }
-        str0 = str0 + `</table>`;
-        newDiv.innerHTML=str0;
-        newDiv.style.padding="2px";
-        newDiv.style.border="2px solid #dddddd";
-    }
-    else{
-        show.textContent = "Show Custom Data";
-        toggle=0;
-        newDiv.innerHTML="";
-        newDiv.style="none";
-        newDiv.style="margin-top:15px"
-    }
-};
+//let toggle = 0;
+//let show = document.getElementById("show");
+// show.onclick = ()=>{
+//     let newDiv = document.getElementById('data_cls');
+//     if(toggle==0){
+//         show.textContent = "hide Custom Data";
+//         toggle=1;
+//         let itemsData = newDiv.getAttribute('data-items');
+//         newDiv.innerHTML=itemsData;
+//         total = itemsData.length;
+//         datas=[];
+//         i=1;
+//         while(i<total){
+//             let s="";
+//             if(itemsData[i]=='['){
+//                 i++;
+//                 while(itemsData[i]!=']'){
+//                     s+=(itemsData[i]);
+//                     i++;
+//                 }
+//                 let c=parseInt(s.slice(-1));
+//                 s=s.slice(1,-4);
+//                 datas.push([s,c]);
+//             }
+//             i++;
+//         }
+//         let str0 = `<table>\n`;
+//         let str1 = `<thead>\n<tr>\n<th>Text</th>\n<th>Label</th>\n</tr>\n</thead>\n`;
+//         str0=str0+str1;
+//         for(let i=0;i<datas.length;i++){ 
+//             let str2 = `<tr>\n<td>${datas[i][0]}</td>\n<td>${emotion[datas[i][1]]}</td>\n</tr>\n`;
+//             str0 = str0 + str2;
+//         }
+//         str0 = str0 + `</table>`;
+//         newDiv.innerHTML=str0;
+//         newDiv.style.padding="2px";
+//         newDiv.style.border="2px solid #dddddd";
+//     }
+//     else{
+//         show.textContent = "Show Custom Data";
+//         toggle=0;
+//         newDiv.innerHTML="";
+//         newDiv.style="none";
+//         newDiv.style="margin-top:15px"
+//     }
+// };
 
 let showmy = document.getElementById("showmy");
 showmy.onclick = ()=>{

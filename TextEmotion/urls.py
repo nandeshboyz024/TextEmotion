@@ -20,11 +20,14 @@ from Core import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.run,name='about'),
+    path('',views.run,name='home'),
     path('dataset/',views.Dataset,name='dataset'),
     path('train/',views.Train,name='train'),
     path('predict/',views.Predict_Views,name='predict'),
     path('reload/',views.Reset,name='reload'),
     path('pop_data/',views.Pop_data,name='pop_data'),
     path('train_data/',views.train_data,name='train_data'),
+    path('visualization/',views.visualize,name='visualization'),
+    path('normalization/',views.normalize,name='normalization'),
+    path('conclusion/',views.conclusion,name='conclusion'),
 ]

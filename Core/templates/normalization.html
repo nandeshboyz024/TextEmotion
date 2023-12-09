@@ -1,0 +1,28 @@
+{% extends "./home.html" %}
+{% load static %}
+{% block Title %}
+    Data-Normalization
+{% endblock Title %}
+
+{% block addCSS %}
+{% endblock addCSS %}
+
+{% block Content %}
+    <div style="text-align:center;font-family:Helvetica Neue;margin-top:10px;">
+        <h1 class="heading" style="margin-top:20px;background:radial-gradient(circle at 10% 20%, rgb(255, 12, 253) 0%, rgb(255, 241, 0) 80%); -webkit-background-clip: text; color: transparent;font-family:Helvetica Neue;">Data Normalization</h1>
+    </div>
+    <div style="font-family:Helvetica Neue;text-align:justify;font-size:20px;">
+        <h3>How and Why?</h3>
+        <ul>
+            <li>Normalisation helps us to minimize data redundancy by removing duplicate data beacuse it may be cause of bias.</li>
+            <li>Normalisation ensures consistency of data across database. Without normalization, if data is duplicated across multiple records and one copy is updated or deleted, it is easy to miss updating or deleting the corresponfing data in other places.</li>
+            <li>Data should not be misclassified otherwise it can be cuase of wrong prediction. For example, if you add text "I am happy" in sadness class, then model will predict it as sadness which is not good to our purpose.</li>
+            <li>Data should be according to feature of the dataset. For example, it is meaningless to add text "my mobile number is +919887961384" or "open the site 'https://www.google.com/' in any emotion-class." </li>
+        </ul>
+    </div>
+
+{% endblock Content %}
+
+{% block addJS %}
+
+{% endblock addJS %}

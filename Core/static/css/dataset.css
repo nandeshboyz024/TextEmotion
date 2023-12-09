@@ -37,7 +37,7 @@ textarea:focus {
   border-radius: 4px;
 }
 /* Style the select element */
-#emotion{
+#id_emotion{
   text-align: center;
   padding: 5px;
   font-size:20px;
@@ -48,18 +48,18 @@ textarea:focus {
 }
 
 /* Style the options */
-#emotion option {
+#id_emotion option {
   background-color: #fff;
   color: #333;
 }
 
 /* Style the select element on hover */
-#emotion:hover {
+#id_emotion:hover {
   border-color: #999;
 }
 
 /* Style the options on hover */
-#emotion option:hover {
+#id_emotion option:hover {
   background-color: #05c60b92;
 }
 

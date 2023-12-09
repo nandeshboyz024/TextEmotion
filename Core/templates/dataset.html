@@ -11,9 +11,10 @@
 {% endblock addCSS %}
 
 {% block Content %}
-  <button class="btn_style" id="show">Show Custom Data</button>
-  <div id = "data_cls" style="margin-top:15px;" data-items="{{items}}"></div>
-  <h1 style="margin-top:20px;background:radial-gradient(circle at 10% 20%, rgb(255, 12, 253) 0%, rgb(255, 241, 0) 80%); -webkit-background-clip: text; color: transparent;font-family:Helvetica Neue;display: inline;">Create Your Own Dataset</h1>
+<div style="text-align:center;font-family:Helvetica Neue;margin-top:10px;">
+  <h1 class="heading" style="margin-top:20px;background:radial-gradient(circle at 10% 20%, rgb(255, 12, 253) 0%, rgb(255, 241, 0) 80%); -webkit-background-clip: text; color: transparent;font-family:Helvetica Neue;">Create Your Own Dataset</h1>
+</div>
+ 
   <div class="card" id = "mydiv" style="margin-top:20px;padding-bottom:10px;position: relative;">  
     <canvas id="cv" style="position:absolute;"></canvas>
     <form action="" method="POST">
